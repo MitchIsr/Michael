@@ -73,20 +73,35 @@ WSGI_APPLICATION = 'Cyber_Course_Project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_register_db',
-        'USER': 'root',  
-        'PASSWORD': 'Sp@2025!!lipaz', 
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'communication_ltd_db.sqlite3',  # שם מסד נתונים רלוונטי לחברה
     }
 }
 
-#test-git
-#test
+# Backup MySQL configuration (commented out for team collaboration)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'django_register_db',
+#         'USER': 'root',  
+#         'PASSWORD': 'Sp@2025!!lipaz', 
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#         'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+#         },
+#     }
+# }
+
+# Password hashers - Custom HMAC + Salt implementation
+PASSWORD_HASHERS = [
+    'Cyber_Course_Project.hashers.HMACPasswordHasher',  # Our custom HMAC hasher
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',  # Django default (also uses HMAC + Salt)
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
